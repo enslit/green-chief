@@ -6,11 +6,19 @@ import {Grid, Typography} from "@material-ui/core"
 import CouponsTable from "./CouponsTable"
 import {setAppTitle} from "../../redux/actions/appActions"
 import {couponListSelector, getLoading} from "../../redux/selectors/selectors"
+import {makeStyles} from "@material-ui/styles"
+
+const useStyles = makeStyles(theme => ({
+	list: {
+		marginTop: theme.spacing(2)
+	},
+}))
 
 const Coupons = () => {
 	const dispatch = useDispatch()
 	const coupons = useSelector(state => couponListSelector(state))
 	const loading = useSelector(state => getLoading(state))
+	const classes = useStyles()
 
 	useEffect(() => {
 		dispatch(setAppTitle('Купоны'))
@@ -18,7 +26,7 @@ const Coupons = () => {
 	}, [dispatch])
 
 	return (
-		<Grid container spacing={2}>
+		<Grid container spacing={2} className={classes.list}>
 			<Grid item xs={12}>
 				{
 					loading

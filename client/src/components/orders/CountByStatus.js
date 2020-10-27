@@ -9,7 +9,7 @@ function CountByStatus(props) {
 
 	return (
 		<ListItem dense component={'li'}>
-			<ListItemText style={{color: color}}>{status} - {props.count}</ListItemText>
+			<ListItemText style={{color: color}}>{status}: {props.count}</ListItemText>
 		</ListItem>
 	);
 }

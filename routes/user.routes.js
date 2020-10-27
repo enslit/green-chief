@@ -10,7 +10,7 @@ require('dotenv')
 
 router.get('/', async (req, res) => {
 	try {
-		User.find({}).populate('coupon')
+		User.find({})
 			.then(response => {
 				res.json(utils.responseCreator(1, '', response))
 			})
@@ -26,7 +26,7 @@ router.get('/:userId', async (req, res) => {
 		return res.status(400).json(utils.responseCreator(0, 'Не указан ID пользователя'))
 	}
 
-	const user = await User.findById(userId).populate('coupon').exec()
+	const user = await User.findById(userId).exec()
 	if (!user) {
 		return res.status(404).json(utils.responseCreator(2, 'Пользователь не найден'))
 	}
@@ -39,13 +39,13 @@ router.put('/', async (req, res) => {
 	try {
 		const form = req.body
 
-		let coupon = await Coupon.findOne({code: form.coupon.code})
-
-		if (!coupon && form.coupon.code) {
-			coupon = await utils.coupon.create(form.coupon.code, form._id)
-		}
-
-		form.coupon = coupon
+		// let coupon = await Coupon.findOne({code: form.coupon})
+		//
+		// if (!coupon && form.coupon) {
+		// 	coupon = await utils.coupon.create(form.coupon, form._id)
+		// }
+		//
+		// form.coupon = coupon
 
 		User.findByIdAndUpdate(form._id, form)
 			.then(response => {
@@ -104,11 +104,17 @@ router.post(
 			}
 
 			const hashedPass = await bcrypt.hash(password, 12)
-			const user = new User({email, name, password: hashedPass})
+			const user = new User({email, name, password: hashedPass, coupon})
 
-			if (coupon) {
-				user.coupon = await utils.coupon.create(coupon, user._id)
-			}
+			// if (coupon) {
+			// 	const c = await Coupon.findOne({code: coupon})
+			//
+			// 	if (c) {
+			// 		user.coupon = c
+			// 	} else {
+			// 		user.coupon = await utils.coupon.create(coupon, user._id)
+			// 	}
+			// }
 
 			// Coupon
 			// const coupons = []

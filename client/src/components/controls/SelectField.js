@@ -28,16 +28,21 @@ function SelectField(props) {
 					variant={variant}
 				>
 					<MenuItem value="">
-						<em>None</em>
+						<em>Без купона</em>
 					</MenuItem>
-					{options.map(option => {
-						return (
-							<MenuItem value={option.value}>
-								{option.value}
-							</MenuItem>
-						)
-					})}
-					<MenuItem value={10}>Ten</MenuItem>
+					{
+						options
+							? options.map(option => {
+									return (
+										<MenuItem key={option.id} value={option.value}>
+											{option.value}
+										</MenuItem>
+									)
+								})
+							: <MenuItem value="">
+									<em>Купонов нет</em>
+								</MenuItem>
+					}
 				</Select>
 			</FormControl>
 		</div>

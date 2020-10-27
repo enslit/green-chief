@@ -28,8 +28,6 @@ router.post(
 			const user = await User
 													.findOne({email})
 													.select('name password isAdmin isBlocked coupon')
-													.populate('coupon')
-			console.log(user)
 
 			if (!user) {
 				return response.status(400).json({message: 'Пользователь не найден'})

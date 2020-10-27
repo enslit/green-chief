@@ -7,7 +7,8 @@ const schema = new Schema({
 	password: {type: String, required: true, select: false},
 	isAdmin: {type: Boolean, default: false},
 	isBlocked: {type: Boolean, default: false},
-	coupon: {type: Types.ObjectId, ref: 'Coupon', default: null}
+	// coupon: {type: Types.ObjectId, ref: 'Coupon', default: null}
+	coupon: {type: String, default: null}
 })
 
 // TODO add cascade delete all coupons this user

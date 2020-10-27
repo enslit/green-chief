@@ -54,19 +54,13 @@ const NavBar = ({ onLogout }) => {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" className={classes.title}>
+                        <Typography variant="subtitle1" component={'h4'} className={classes.title}>
                             {title}
                         </Typography>
-                        <div className={classes.userArea}>
-                            <Typography variant={"subtitle1"} component={'span'}>
-                                Привет {user.name}
-                            </Typography>
-                            <Button className={classes.logout} onClick={handleClickLogout}>Выйти</Button>
-                        </div>
                     </Toolbar>
                 </AppBar>
             </div>
-            <Menu open={openMenu} setOpen={setOpenMenu} />
+            <Menu open={openMenu} setOpen={setOpenMenu} userName={user.name} handleClickLogout={handleClickLogout} />
         </>
     );
 }

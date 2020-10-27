@@ -9,7 +9,7 @@ require('dotenv').config()
 const app = express()
 const PORT = process.env.PORT || 5000
 const corsOptions = {
-	origin: true,
+	origin: ['http://localhost:3000', 'http://green-chief.ru', 'http://80.249.148.177'],
 	methods: ['GET', 'POST', 'PUT', 'DELETE'],
 	credentials: true
 }

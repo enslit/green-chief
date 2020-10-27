@@ -12,7 +12,7 @@ const RegisterFormContainer = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(setAppTitle('Добавить нового пользователя'))
+		dispatch(setAppTitle('Новый пользователь'))
 		dispatch(fetchCoupons())
 	}, [dispatch])
 

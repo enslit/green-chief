@@ -42,7 +42,11 @@ const UserLine = ({user}) => {
 							{user.email}
 						</Typography>
 						<Typography variant={"body1"} component={'p'}>
-							{user.coupon && user.coupon.code}
+							{
+								user.coupon
+									? 'Код купона: ' + user.coupon
+									: 'Купон не указан'
+							}
 						</Typography>
 					</CardContent>
 				</Card>

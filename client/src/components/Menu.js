@@ -7,6 +7,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import {NavLink} from "react-router-dom"
+import PersonIcon from '@material-ui/icons/Person'
+import PeopleIcon from '@material-ui/icons/People'
+import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 const useStyles = makeStyles({
     list: {
@@ -21,16 +25,16 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Menu({open, setOpen}) {
+export default function Menu({open, setOpen, userName, handleClickLogout}) {
     const classes = useStyles();
 
     const toggleDrawer = (open) => () => {
         setOpen(open)
     };
     const menu = [
-        {id: 1, title: 'Пользователи', to: '/users'},
-        {id: 2, title: 'Купоны', to: '/coupons'},
-        {id: 3, title: 'Заказы', to: '/orders'}
+        {id: 1, title: 'Пользователи', to: '/users', icon: <PeopleIcon />},
+        {id: 2, title: 'Купоны', to: '/coupons', icon: <ConfirmationNumberIcon />},
+        // {id: 3, title: 'Заказы', to: '/orders', icon: <ShoppingBasketIcon />}
     ]
 
     const list = (menuList) => (
@@ -53,11 +57,26 @@ export default function Menu({open, setOpen}) {
                     return (
                       <NavLink key={item.id} to={item.to} className={classes.link}>
                         <ListItem button className={classes.listItem}>
+                            <ListItemIcon>
+                                {item.icon}
+                            </ListItemIcon>
                             <ListItemText primary={item.title} />
                         </ListItem>
                     </NavLink>
                     )
                 })}
+                <ListItem divider={true} />
+                <ListItem>
+                    <ListItemIcon>
+                        <PersonIcon />
+                    </ListItemIcon>
+                    <ListItemText>
+                        {userName}
+                    </ListItemText>
+                </ListItem>
+                <ListItem button className={classes.listItem} onClick={handleClickLogout}>
+                    <ListItemText secondary='Выйти' />
+                </ListItem>
             </List>
         </div>
     )

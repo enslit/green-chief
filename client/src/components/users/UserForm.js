@@ -7,6 +7,7 @@ import {connect, useSelector} from "react-redux"
 import {getLoading} from "../../redux/selectors/selectors"
 import {deleteUser} from "../../redux/thunks/usersThunks"
 import CheckboxField from "../controls/CheckboxField"
+import SelectField from "../controls/SelectField"
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -44,9 +45,12 @@ const validate = values => {
 	return errors
 }
 
-let UserForm = ({handleSubmit, initialValues, deleteUser}) => {
+let UserForm = ({handleSubmit, initialValues, deleteUser, coupons, loading}) => {
 	const classes = useStyles()
-	const loading = useSelector(state => getLoading(state))
+	let couponOptions = []
+	if (coupons.length > 0) {
+		couponOptions = coupons.map(coupon => ({id: coupon.id, value: coupon.code}))
+	}
 
 	return (
 		<Grid container spacing={2}>
@@ -74,13 +78,12 @@ let UserForm = ({handleSubmit, initialValues, deleteUser}) => {
 							</Grid>
 							<Grid item xs={12}>
 								<Field
-									name={`coupon.code`}
-									component={InputField}
+									name={"coupon"}
+									component={SelectField}
+									options={couponOptions}
 									id={"coupon"}
 									label={"Купон"}
-									type={"text"}
 									variant={"outlined"}
-									autoComplete={"coupon"}
 									fullWidth
 								/>
 							</Grid>
@@ -139,7 +142,8 @@ UserForm = reduxForm({form: 'userDetail', validate})(UserForm)
 
 UserForm = connect(
 	state => ({
-		initialValues: state.users.detail
+		initialValues: state.users.detail,
+		loading: getLoading(state)
 	}),
 	{deleteUser}
 )(UserForm)

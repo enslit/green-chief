@@ -17,7 +17,7 @@ function UserDashboard(props) {
 
 	useEffect(() => {
 		dispatch(setAppTitle('Панель'))
-		dispatch(fetchCouponOrders(user.coupon.code))
+		dispatch(fetchCouponOrders(user.coupon))
 	}, [dispatch])
 
 	if (loading) {
@@ -39,7 +39,7 @@ function UserDashboard(props) {
 							<Typography variant={"body1"} component={'h4'}>
 								Код твоего купона&nbsp;
 								<Typography variant={'subtitle1'} component={'strong'}>
-									{user.coupon.code}
+									{user.coupon}
 								</Typography>
 							</Typography>
 						</Box>
