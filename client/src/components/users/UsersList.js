@@ -35,6 +35,8 @@ const UserLine = ({user}) => {
 			<NavLink to={'/users/' + user._id} className={classes.navLink}>
 				<Card raised>
 					<CardContent className={classes.cardContent}>
+
+
 						<Typography variant={'h5'} component={'h2'} className={classes.name}>
 							{user.name}
 						</Typography>

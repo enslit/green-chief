@@ -11,12 +11,12 @@ const WooCommerce = new WooCommerceAPI({
 	version: process.env.WOO_VERSION
 });
 
-const WooCommerce_green = new WooCommerceAPI({
+const WooCommerceCustom = new WooCommerceAPI({
 	url: process.env.WOO_URL,
 	consumerKey: process.env.WOO_KEY,
 	consumerSecret: process.env.WOO_SECRET,
 	wpAPI: true,
-	version: process.env.WOO_GREEN_CHIEF_ENDPOINT_VERSION
+	version: process.env.WOO_CUSTOM_ENDPOINT_VERSION
 });
 
 router.post('/orders', (req, res) => {
@@ -54,7 +54,7 @@ router.get('/coupon-orders/:code', async (req, res) => {
 		res.status(400).json(utils.responseCreator(0, 'Не указан код купона'))
 	}
 
-	WooCommerce_green.getAsync(`coupon-orders/${encodeURI(code)}`)
+	WooCommerceCustom.getAsync(`coupon-orders/${encodeURI(code)}`)
 		.then(result => {
 			console.log('response')
 			const orders = JSON.parse(result.toJSON().body)

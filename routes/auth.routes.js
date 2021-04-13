@@ -10,7 +10,7 @@ require('dotenv')
 router.post(
 	'/login',
 	[
-		check('email', 'Некорректный email').normalizeEmail().isEmail(),
+		check('email', 'Некорректный email').isEmail(),
 		check('password', 'Введите пароль').exists()
 	],
 	async (request, response) => {
@@ -24,6 +24,8 @@ router.post(
 			}
 
 			const {email, password} = request.body
+
+			console.log(email)
 
 			const user = await User
 													.findOne({email})
