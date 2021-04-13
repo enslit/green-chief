@@ -1,7 +1,7 @@
 {
-  "name": "green-chief",
+  "name": "woocommerce-coupons-monitor",
   "version": "1.0.0",
-  "description": "app green-mix",
+  "description": "Приложение мониторинга использования купонов в ИМ на Woocommerce",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
